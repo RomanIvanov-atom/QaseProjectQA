@@ -11,14 +11,16 @@ public class LoginPage {
     private final static String SIGN_IN_BUTTON_TEXT = "Sign in";
     private final static String SUBMIT_BUTTON = "//button[@type='submit']";
 
-    public void openPage() {
+    public LoginPage openPage() {
         open("login");
         $x(SUBMIT_BUTTON).shouldBe(visible, clickable);
+        return this;
     }
 
-    public void login(String login, String password) {
+    public ProjectsPage login(String login, String password) {
         $(USER).setValue(login);
         $(PASSWORD).setValue(password);
         $(byText(SIGN_IN_BUTTON_TEXT)).click();
+        return new ProjectsPage();
     }
 }

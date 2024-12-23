@@ -12,13 +12,14 @@ public class CreateTestCaseModal {
 
     private static final String SAVE_BUTTON = "button#save-case";
 
-    public void waitTillOpened() {
+    public CreateTestCaseModal waitTillOpened() {
         $(SAVE_BUTTON)
                 .shouldBe(visible)
                 .shouldNotBe(clickable);
+        return this;
     }
 
-    public void createTestCase(String testCaseName, String status, String description, String severity, String priority,
+    public ProjectPage createTestCase(String testCaseName, String status, String description, String severity, String priority,
     boolean toBeAutomated, String preConditions, String postConditions) {
         waitTillOpened();
         new Input("Title").write(testCaseName);
@@ -30,5 +31,6 @@ public class CreateTestCaseModal {
         new TextArea("Pre-conditions").write(preConditions);
         new TextArea("Post-conditions").write(postConditions);
         $(SAVE_BUTTON).click();
+        return new ProjectPage();
     }
 }

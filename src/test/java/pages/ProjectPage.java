@@ -10,23 +10,28 @@ public class ProjectPage {
     private static final String ROW_WITH_THE_LAST_TEST_CASE = "(//*[@id='suitecases-container']//*[@draggable='true']/div)[last()]";
     private static final String CURRENT_PROJECT_CODE_TITLE = "//*[@id='application-content']//h1";
 
-    public void waitTillOpened() {
+    public ProjectPage waitTillOpened() {
         $(CREATE_TEST_CASE_BUTTON).shouldBe(visible);
+        return this;
     }
 
-    public void checkThatCurrentProjectCodeEqualsSpecificCode(String projectCode) {
+    public ProjectPage checkThatCurrentProjectCodeEqualsSpecificCode(String projectCode) {
         $x(CURRENT_PROJECT_CODE_TITLE).shouldBe(text(projectCode + " repository"));
+        return this;
     }
 
-    public void openCreateTestCaseModal() {
+    public CreateTestCaseModal openCreateTestCaseModal() {
         $(CREATE_TEST_CASE_BUTTON).click();
+        return new CreateTestCaseModal();
     }
 
-    public void checkThatListOfTestCasesContainsSpecificTestCase(String testCaseName) {
+    public ProjectPage checkThatListOfTestCasesContainsSpecificTestCase(String testCaseName) {
         $x(ROW_WITH_THE_LAST_TEST_CASE).shouldHave(text(testCaseName));
+        return this;
     }
 
-    public void openProjectSettings() {
+    public ProjectSettingsPage openProjectSettings() {
         $x(SETTINGS_BUTTON).click();
+        return new ProjectSettingsPage();
     }
 }

@@ -17,19 +17,22 @@ public class ProjectsPage {
         open("projects");
     }
 
-    public void waitTillOpened() {
+    public ProjectsPage waitTillOpened() {
         $(byText(CREATE_NEW_PROJECT_TITLE)).shouldBe(visible, clickable);
+        return this;
     }
 
-    public void clickCreateProject() {
+    public ProjectsPage clickCreateProject() {
         $(byText(CREATE_NEW_PROJECT_TITLE)).click();
         $(MODAL_HEADER).shouldBe(visible);
+        return this;
     }
 
-    public void fillCreateProjectFieldsAndSubmit(String projectName, String projectCode) {
+    public ProjectPage fillCreateProjectFieldsAndSubmit(String projectName, String projectCode) {
         $(PROJECT_NAME_FIELD).setValue(projectName);
         $(PROJECT_CODE_FIELD).setValue(projectCode);
         $x(IS_PUBLIC_RADIOBUTTON).click();
         $x(SUBMIT_BUTTON).click();
+        return new ProjectPage();
     }
 }

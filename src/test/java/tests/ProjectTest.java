@@ -11,23 +11,21 @@ public class ProjectTest extends BaseTest {
 
     @Test
     public void createProjectAndTestCaseTest() {
-        loginPage.openPage();
-        loginPage.login(login, password);
-        projectsPage.waitTillOpened();
-
-        projectsPage.clickCreateProject();
-        projectsPage.fillCreateProjectFieldsAndSubmit(testProjectName, testCode);
-        projectPage.waitTillOpened();
-        projectPage.checkThatCurrentProjectCodeEqualsSpecificCode(testCode);
-        projectPage.openCreateTestCaseModal();
-        createTestCaseModal.waitTillOpened();
-        createTestCaseModal.createTestCase(testCaseName, "Draft", "Test case description", "Critical",
-                "High", true, "Test case preconditions...", "Test case postconditions...");
-        projectPage.waitTillOpened();
-        projectPage.checkThatListOfTestCasesContainsSpecificTestCase(testCaseName);
-
-        projectPage.openProjectSettings();
-        projectSettingsPage.waitTillOpened();
-        projectSettingsPage.deleteCurrentProject();
+        loginPage.openPage()
+                .login(login, password)
+                .waitTillOpened()
+                .clickCreateProject()
+                .fillCreateProjectFieldsAndSubmit(testProjectName, testCode)
+                .waitTillOpened()
+                .checkThatCurrentProjectCodeEqualsSpecificCode(testCode)
+                .openCreateTestCaseModal()
+                .waitTillOpened()
+                .createTestCase(testCaseName, "Draft", "Test case description", "Critical", "High",
+                        true, "Test case preconditions...", "Test case postconditions...")
+                .waitTillOpened()
+                .checkThatListOfTestCasesContainsSpecificTestCase(testCaseName)
+                .openProjectSettings()
+                .waitTillOpened()
+                .deleteCurrentProject();
     }
 }
